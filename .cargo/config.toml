@@ -2,7 +2,7 @@
 target = "thumbv7em-none-eabihf"
 
 [target.thumbv7em-none-eabihf]
-runner = "./renode-runner.sh"
+runner = "bash ./renode-runner.sh"
 rustflags = [
     "-C", "link-arg=-Tlink.x",   # cortex-m-rt's linker script
     "-C", "target-cpu=cortex-m4",
