@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-simulate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust target
+        run: rustup target add thumbv7em-none-eabihf
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Install Renode
+        run: |
+          wget -q https://github.com/renode/renode/releases/download/v1.16.1/renode_1.16.1_amd64.deb
+          sudo apt-get install -y ./renode_1.16.1_amd64.deb
+
+      - name: Run simulation
+        run: |
+          timeout 30 renode --console hello_m4.resc 2>&1 | tee renode.log
+          grep "Hello World from Cortex-M4 (Rust)!" renode.log

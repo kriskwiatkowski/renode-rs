@@ -1,0 +1,8 @@
+[build]
+target = "thumbv7em-none-eabihf"
+
+[target.thumbv7em-none-eabihf]
+rustflags = [
+    "-C", "link-arg=-Tlink.x",   # cortex-m-rt's linker script
+    "-C", "target-cpu=cortex-m4",
+]

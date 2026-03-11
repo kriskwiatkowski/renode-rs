@@ -1,0 +1,13 @@
+mach create "cortex-m4-hello-rust"
+
+machine LoadPlatformDescription @hello_m4.repl
+
+showAnalyzer sysbus.uart0 Antmicro.Renode.Analyzers.LoggingUartAnalyzer
+
+macro reset
+"""
+    sysbus LoadELF @target/thumbv7em-none-eabihf/release/hello-m4
+"""
+
+runMacro $reset
+start
