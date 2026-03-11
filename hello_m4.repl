@@ -14,3 +14,6 @@ sram: Memory.MappedMemory @ sysbus 0x20000000
     size: 0x00040000
 
 uart0: UART.CMSDK_APB_UART @ sysbus 0x49303000
+
+dwt: Miscellaneous.DWT @ sysbus 0xE0001000
+    frequency: 25000000

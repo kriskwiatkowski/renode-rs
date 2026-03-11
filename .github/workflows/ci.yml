@@ -15,7 +15,7 @@ jobs:
         run: rustup target add thumbv7em-none-eabihf
 
       - name: Build
-        run: cargo build --release
+        run: cargo build --release --features cycle-count
 
       - name: Install Renode
         run: |
@@ -26,3 +26,5 @@ jobs:
         run: |
           timeout 30 renode --console hello_m4.resc 2>&1 | tee renode.log
           grep "Hello World from Cortex-M4 (Rust)!" renode.log
+          grep "SHA3-256:" renode.log
+          grep "Cycles:" renode.log
